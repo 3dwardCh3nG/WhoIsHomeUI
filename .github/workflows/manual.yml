@@ -2,10 +2,6 @@ name: Manual Image Build
 
 on:
   workflow_dispatch:
-  workflow_call:
-    secrets:
-      DEVOPS_GITHUB_TOKEN:
-        required: true
 
 permissions:
   id-token: write
