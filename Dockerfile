@@ -1,8 +1,8 @@
 # Here is the build image
 FROM --platform=linux/arm64 python:slim-bookworm as builder
-RUN apt-get update
-RUN apt-get install procps gcc -y
-RUN apt-get clean
+RUN apt update
+RUN apt install procps gcc -y
+RUN apt clean
 COPY requirements.txt /app/requirements.txt
 WORKDIR app
 RUN pip install --user -r requirements.txt
