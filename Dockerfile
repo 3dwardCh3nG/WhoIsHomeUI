@@ -20,7 +20,10 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR app
 ENV PATH=/root/.local/bin:$PATH
+
 COPY --chown=1001 --from=builder /app/scripts /app/scripts
 RUN chmod 0740 /app/scripts/*
 
 EXPOSE 8008
+
+CMD /app/scripts/entrypoint.sh
