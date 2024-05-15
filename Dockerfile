@@ -1,8 +1,8 @@
 # Here is the build image
 FROM --platform=linux/arm64 python:slim-bookworm as builder
-RUN apt-get update \
-    && apt-get install procps gcc -y \
-    && apt-get clean
+RUN apt-get update
+RUN apt-get install procps gcc -y
+RUN apt-get clean
 COPY requirements.txt /app/requirements.txt
 WORKDIR app
 RUN pip install --user -r requirements.txt
@@ -14,10 +14,10 @@ FROM --platform=linux/arm64 python:slim-bookworm as app
 ENV PYTHONUNBUFFERED=1
 COPY --from=builder /root/.local /root/.local
 COPY --from=builder /app /app
-RUN apt update \
-    && apt install -y net-tools arp-scan \
-    && apt clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt update
+RUN apt install -y net-tools arp-scan
+RUN apt clean
+RUN rm -rf /var/lib/apt/lists/*
 WORKDIR app
 ENV PATH=/root/.local/bin:$PATH
 
