@@ -1,5 +1,5 @@
 # Here is the build image
-FROM python:3-slim-buster as builder
+FROM --platform=linux/arm64 python:slim-bookworm as builder
 RUN apt-get update \
     && apt-get install procps gcc -y \
     && apt-get clean
@@ -10,7 +10,7 @@ COPY WhoIsHomeUIDjango /app
 COPY scripts /app/scripts
 
 # Here is the production image
-FROM python:3-slim-buster as app
+FROM --platform=linux/arm64 python:slim-bookworm as app
 ENV PYTHONUNBUFFERED=1
 COPY --from=builder /root/.local /root/.local
 COPY --from=builder /app /app
